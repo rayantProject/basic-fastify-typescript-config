@@ -1,65 +1,87 @@
 
 
-## 🚀 basic-fastify-typescript-config
 
-Configuration de base pour démarrer un projet **Fastify** avec **TypeScript**, **esbuild**, et des outils modernes de développement.
+# 🚀 basic-fastify-typescript-config
 
-### 📦 Stack utilisée
-- **Fastify** – Framework HTTP ultra-rapide
-- **TypeScript** – Typage fort côté Node.js
-- **esbuild** – Bundler rapide pour le build + watch
-- **nodemon** + **wait-on** – Rechargement automatique à chaud
-- **eslint** – Linting du code
-- **SWC** – Compilation alternative rapide (optionnelle)
-- **Decorator Plugin** – Support des décorateurs via `esbuild`
+A lightweight setup for a **Fastify** project with **TypeScript**, optimized for fast development and efficient builds using **esbuild**.
 
----
+## 📦 Tech Stack
+- **Fastify** – Ultra-fast HTTP framework
+- **TypeScript** – Static typing for Node.js
+- **esbuild** – Lightning-fast bundler for build and watch
+- **nodemon** + **wait-on** – Automatic reloading during development
+- **ESLint** – Code linting and formatting
+- **SWC** – Optional fast compilation alternative
+- **Typebox** – TypeScript schema validation
+- **Decorators** – Support for decorators via `esbuild-plugin-decorator`
 
-### 📁 Structure de base
+## 📁 Project Structure
 
 ```
 .
 ├── src/
-│   └── index.ts         # Point d'entrée Fastify
-├── dist/                # Fichiers compilés (output esbuild)
-├── esbuild.config.mjs   # Config esbuild (build & dev)
-├── tsconfig.json        # Config TypeScript
-├── package.json
-└── ...
+│   └── index.ts         # Fastify application entry point
+├── dist/                # Compiled files (esbuild output)
+├── esbuild.config.mjs   # esbuild configuration (build & dev)
+├── tsconfig.json        # TypeScript configuration
+├── package.json         # Dependencies and scripts
+└── .env                 # Environment variables (optional)
 ```
 
----
+## ⚙️ Scripts
 
-### ⚙️ Scripts
+| Command              | Description                                      |
+|----------------------|--------------------------------------------------|
+| `yarn build:tsc`     | Compiles the project with TypeScript (tsc)      |
+| `yarn build:esbuild` | Compiles the project with esbuild               |
+| `yarn dev`           | Development mode with watch and hot-reload      |
+| `yarn start`         | Runs the built application (`dist/index.js`)    |
+| `yarn lint`          | Lints `.js` and `.ts` files                     |
 
-| Commande              | Description                                    |
-|-----------------------|------------------------------------------------|
-| `yarn build:tsc`      | Compile avec TypeScript (tsc uniquement)       |
-| `yarn build:esbuild`  | Build le projet avec esbuild                   |
-| `yarn dev`            | Build + watch + restart automatique avec nodemon |
-| `yarn start`          | Démarre la version buildée (`dist/index.js`)   |
-| `yarn lint`           | Lint les fichiers `.js` et `.ts`               |
+## 🚀 Getting Started
 
----
+### Prerequisites
+- Node.js (version >= 18.x recommended)
+- Yarn (version 4.9.1)
 
-### 🚧 Développement
+### Installation
+```bash
+yarn install
+```
 
-Lance ce projet en mode dev :
-
+### Development
+Start development mode with automatic reloading:
 ```bash
 yarn dev
 ```
 
-Cela :
-- build ton code TypeScript avec esbuild,
-- attend que `dist/index.js` soit généré,
-- puis le lance avec nodemon, avec hot-reload automatique.
+This script:
+- Compiles TypeScript code with esbuild in watch mode,
+- Waits for `dist/index.js` to be generated,
+- Runs the application with nodemon for hot-reload.
 
----
-
-### 📦 Build de production
-
+### Production
+Build and run the application for production:
 ```bash
 yarn build:esbuild
 yarn start
 ```
+
+## 🔧 Configuration
+- **Environment**: Uses `dotenv` to load environment variables from a `.env` file.
+- **Linting**: Configured with `@eslint/js` and `typescript-eslint` for strict rules.
+- **Typebox**: Enables typed schema validation for Fastify.
+
+## 🛠️ Customization
+- Modify `esbuild.config.mjs` to tweak build options (e.g., minification, sourcemaps).
+- Adjust `tsconfig.json` for specific TypeScript settings.
+- Add Fastify plugins using `fastify-plugin` for modularity.
+
+## 📝 Notes
+- The `esbuild-plugin-decorator` enables TypeScript decorator support.
+- `pino-pretty` is included for clean log output in development.
+- The setup is optimized for lightweight projects but can be extended.
+
+## 📜 License
+MIT
+
