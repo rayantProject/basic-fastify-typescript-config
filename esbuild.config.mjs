@@ -28,7 +28,7 @@ const esbuildConfig = {
   platform: "node",
   target: "node23",
   outfile: "dist/index.js",
-  external: ["node:*", "fastify", "@fastify/*"],
+  external: ["node:*", "fastify", "@fastify/*", "dotenv/config"],
   plugins: [
     esbuildPluginDecorator({
       tsconfigPath: "tsconfig.json",
@@ -37,7 +37,7 @@ const esbuildConfig = {
       assets: {
         from: ["src/config/**/*", "src/assets/**/*"],
         to: ["dist/config", "dist/assets"],
-        filter: (file) => !file.endsWith(".env")
+        filter: (file) => !file.endsWith(".env"),
       },
     }),
   ],
@@ -46,36 +46,32 @@ const esbuildConfig = {
 };
 
 const start = async () => {
-  const context = await esbuild.context(esbuildConfig);
-
-  // Handle graceful shutdown in watch mode
-  process.on("SIGINT", async () => {
-    await context.dispose();
-    console.log("Build context disposed.");
-    process.exit(0);
-  });
-
   if (isDev) {
+    const context = await esbuild.context(esbuildConfig);
+
+    process.on("SIGINT", async () => {
+      await context.dispose();
+      console.log("Build context disposed.");
+      process.exit(0);
+    });
+
     console.log("Building initial bundle...");
-    await context.rebuild(); // Ensure initial build completes
+    await context.rebuild();
     console.log("Initial build complete. Watching for changes...");
     await context.watch();
   } else {
     console.log("Building...");
-    const result = await context.build();
+    const result = await esbuild.build(esbuildConfig); // <<< ICI, build direct sans context
     if (result.metafile) {
       console.log(await esbuild.analyzeMetafile(result.metafile));
     }
+    console.log("Build finished.");
+    process.exit(0); // <<< Ajoute ça pour forcer la sortie propre
   }
 };
 
 
-
-start()
-  .then(() => {
-    console.log("Build completed successfully.");
-  })
-  .catch((error) => {
-    console.error("Build failed:", error);
-    process.exit(1);
-  });
+start().catch((error) => {
+  console.error("Build failed:", error);
+  process.exit(1);
+});

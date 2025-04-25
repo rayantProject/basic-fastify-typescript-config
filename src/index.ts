@@ -1,9 +1,12 @@
 import server from "@/server";
 
+
 const start = async () => {
   try {
-    await server.listen({ port: 3000 });
-    console.log("Server is running on http://localhost:3000");
+    await server.ready();
+    const port = +server.config.API_PORT;
+    const host = server.config.API_HOST;
+    await server.listen({ port, host });
   } catch (err) {
     server.log.error(err);
     process.exit(1);
