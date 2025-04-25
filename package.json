@@ -1,4 +1,29 @@
 {
-  "name": "esbuild-node-config",
-  "packageManager": "yarn@4.9.1"
+  "name": "basic-fastify-typescript-config",
+  "packageManager": "yarn@4.9.1",
+  "devDependencies": {
+    "@eslint/js": "^9.25.1",
+    "@swc/core": "^1.11.22",
+    "@types/node": "^22.15.2",
+    "concurrently": "^9.1.2",
+    "esbuild": "^0.25.3",
+    "esbuild-plugin-copy": "^2.1.1",
+    "esbuild-plugin-decorator": "^0.4.0",
+    "eslint": "^9.25.1",
+    "globals": "^16.0.0",
+    "nodemon": "^3.1.10",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.31.0",
+    "wait-on": "^8.0.3"
+  },
+  "scripts": {
+    "build:tsc": "tsc",
+    "build:esbuild": "node esbuild.config.mjs",
+    "dev": "concurrently \"node esbuild.config.mjs --dev\" \"wait-on dist/index.js && nodemon\"",
+    "lint": "eslint . --ext .js,.ts",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "fastify": "^5.3.2"
+  }
 }
