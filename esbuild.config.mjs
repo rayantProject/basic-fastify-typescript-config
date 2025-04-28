@@ -1,9 +1,7 @@
-
 import * as esbuild from "esbuild";
-import copyPlugin from "esbuild-plugin-copy";
 import { esbuildPluginDecorator } from "esbuild-plugin-decorator";
+import { copy } from "esbuild-plugin-copy";
 import { rmSync } from "fs";
-
 
 const isDev = process.argv.includes("--dev");
 
@@ -19,7 +17,6 @@ if (!isDev) {
   }
 }
 
-
 const esbuildConfig = {
   entryPoints: ["src/index.ts"],
   minify: !isDev,
@@ -27,18 +24,23 @@ const esbuildConfig = {
   bundle: true,
   platform: "node",
   target: "node23",
-  outfile: "dist/index.js",
+  outfile: `${outdir}/index.js`,
   external: ["node:*", "fastify", "@fastify/*", "dotenv/config"],
   plugins: [
     esbuildPluginDecorator({
       tsconfigPath: "tsconfig.json",
     }),
-    copyPlugin({
-      assets: {
-        from: ["src/config/**/*", "src/assets/**/*"],
-        to: ["dist/config", "dist/assets"],
-        filter: (file) => !file.endsWith(".env"),
-      },
+    copy({
+      resolveFrom: "cwd",
+      assets: [
+        {
+          from: ["src/config/**/*"],
+          to: ["dist/config"],
+          filter: (path) => !path.endsWith(".ts") && !path.endsWith(".js"),
+          watch: isDev,
+        }
+      ],
+      watch: isDev,
     }),
   ],
   loader: { ".json": "json" },
@@ -69,7 +71,6 @@ const start = async () => {
     process.exit(0); // <<< Ajoute ça pour forcer la sortie propre
   }
 };
-
 
 start().catch((error) => {
   console.error("Build failed:", error);
