@@ -1,5 +1,4 @@
 import * as esbuild from "esbuild";
-import { esbuildPluginDecorator } from "esbuild-plugin-decorator";
 import { copy } from "esbuild-plugin-copy";
 import { rmSync } from "fs";
 
@@ -27,9 +26,6 @@ const esbuildConfig = {
   outfile: `${outdir}/index.js`,
   external: ["node:*", "fastify", "@fastify/*", "dotenv/config"],
   plugins: [
-    esbuildPluginDecorator({
-      tsconfigPath: "tsconfig.json",
-    }),
     copy({
       resolveFrom: "cwd",
       assets: [
