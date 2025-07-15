@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fastify TypeScript Starter</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+  <div class="max-w-4xl mx-auto px-4 py-10">
+    <!-- Logo -->
+    <div class="flex justify-center mb-6">
+      <img src="./astro-bb.png" alt="Astronaute" class="w-32 h-32" />
+    </div>
+
+    <!-- Title -->
+    <h1 class="text-4xl font-bold text-center text-indigo-700 mb-2">
+      🚀Astro baby: Fastify TypeScript Starter
+    </h1>
+
+    <!-- Badges -->
+    <div class="flex flex-wrap justify-center gap-3 mt-4 mb-8">
+      <img src="https://img.shields.io/badge/Node.js-18.x-brightgreen.svg" alt="Node.js">
+      <img src="https://img.shields.io/badge/Yarn-4.9.2-blue.svg" alt="Yarn">
+      <img src="https://img.shields.io/npm/v/fastify.svg" alt="Fastify">
+      <img src="https://img.shields.io/badge/bundler-esbuild-ffcf00.svg" alt="esbuild">
+      <img src="https://img.shields.io/badge/code%20style-ESLint-purple.svg" alt="ESLint">
+      <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT">
+    </div>
+
+    <!-- Description -->
+    <p class="text-center text-lg text-gray-700 mb-10">
+      A modern, lightweight setup for a <strong>Fastify</strong> project with <strong>TypeScript</strong>,
+      optimized for fast development and efficient builds using <strong>esbuild</strong>.
+    </p>
+
+    <!-- Sections -->
+    <section class="mb-10">
+      <h2 class="text-2xl font-semibold text-indigo-600 mb-3">📦 Tech Stack</h2>
+      <ul class="list-disc list-inside space-y-1">
+        <li><strong>Fastify</strong> v5.4.0 – Ultra-fast HTTP framework with static file serving</li>
+        <li><strong>TypeScript</strong> v5.8.3 – Static typing for Node.js</li>
+        <li><strong>esbuild</strong> v0.25.6 – Lightning-fast bundler</li>
+        <li><strong>nodemon</strong>, <strong>wait-on</strong>, <strong>concurrently</strong> – Hot reloading</li>
+        <li><strong>ESLint</strong> v9.31.0 – Code linting</li>
+        <li><strong>Typebox</strong> v0.34.37 – Typed schema validation</li>
+        <li><strong>dotenv</strong> v17.2.0 – Env variable management</li>
+      </ul>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-2xl font-semibold text-indigo-600 mb-3">📁 Project Structure</h2>
+      <pre class="bg-gray-800 text-white rounded-md p-4 text-sm overflow-auto">
+.
+├── src/
+│   ├── index.ts         # Fastify application entry point
+│   ├── server.ts        # Server configuration
+│   ├── config/          # Configuration files
+│   ├── plugins/         # Fastify plugins
+│   └── routes/          # Route handlers
+├── dist/                # Compiled files (esbuild output)
+├── public/              # Static assets
+├── settings/            # Build and project settings
+├── esbuild.config.ts    # esbuild configuration
+├── eslint.config.mjs    # ESLint configuration
+├── tsconfig.json        # TypeScript configuration
+├── nodemon.json         # Nodemon configuration
+├── package.json         # Dependencies and scripts
+└── .env                 # Env variables (optional)
+      </pre>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-2xl font-semibold text-indigo-600 mb-3">⚙️ Scripts</h2>
+      <table class="table-auto w-full text-left border border-gray-300">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="px-4 py-2 border">Command</th>
+            <th class="px-4 py-2 border">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border px-4 py-2">yarn build:tsc</td>
+            <td class="border px-4 py-2">Compile with TypeScript</td>
+          </tr>
+          <tr>
+            <td class="border px-4 py-2">yarn build:esbuild</td>
+            <td class="border px-4 py-2">Compile with esbuild</td>
+          </tr>
+          <tr>
+            <td class="border px-4 py-2">yarn dev</td>
+            <td class="border px-4 py-2">Development mode with auto-reload</td>
+          </tr>
+          <tr>
+            <td class="border px-4 py-2">yarn start</td>
+            <td class="border px-4 py-2">Run the built app (dist/index.js)</td>
+          </tr>
+          <tr>
+            <td class="border px-4 py-2">yarn lint</td>
+            <td class="border px-4 py-2">Lint code with ESLint</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-2xl font-semibold text-indigo-600 mb-3">🚀 Getting Started</h2>
+      <h3 class="text-lg font-medium">Prerequisites</h3>
+      <ul class="list-disc list-inside mb-4">
+        <li>Node.js (>= 18.x)</li>
+        <li>Yarn (4.9.2)</li>
+      </ul>
+
+      <h3 class="text-lg font-medium">Installation</h3>
+      <pre class="bg-gray-800 text-white rounded-md p-4 text-sm mb-4">yarn install</pre>
+
+      <h3 class="text-lg font-medium">Development</h3>
+      <pre class="bg-gray-800 text-white rounded-md p-4 text-sm mb-2">yarn dev</pre>
+      <p class="text-sm text-gray-600 mb-4">Compiles with esbuild, watches files, runs app via nodemon</p>
+
+      <h3 class="text-lg font-medium">Production</h3>
+      <pre class="bg-gray-800 text-white rounded-md p-4 text-sm">yarn build:esbuild && yarn start</pre>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-2xl font-semibold text-indigo-600 mb-3">🔧 Configuration</h2>
+      <ul class="list-disc list-inside space-y-1">
+        <li><strong>dotenv</strong>: Loads env variables from .env</li>
+        <li><strong>ESLint</strong>: Flat config with `@eslint/js` & `typescript-eslint`</li>
+        <li><strong>Typebox</strong>: Enables schema validation</li>
+      </ul>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-2xl font-semibold text-indigo-600 mb-3">🛠️ Customization</h2>
+      <ul class="list-disc list-inside space-y-1">
+        <li>Edit `esbuild.config.ts` for build options</li>
+        <li>Adjust `tsconfig.json` for TS settings</li>
+        <li>Add custom Fastify plugins in `plugins/`</li>
+      </ul>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-2xl font-semibold text-indigo-600 mb-3">📝 Notes</h2>
+      <ul class="list-disc list-inside space-y-1">
+        <li>esbuild handles dev + prod builds</li>
+        <li>pino-pretty used for clean logs in dev</li>
+        <li>Extendable ESLint config (JSON, Markdown, etc.)</li>
+        <li>Fastify externals excluded for smaller builds</li>
+      </ul>
+    </section>
+
+    <footer class="text-center text-sm text-gray-500 mt-12">
+      © MIT License
+    </footer>
+  </div>
+
+</body>
+</html>
